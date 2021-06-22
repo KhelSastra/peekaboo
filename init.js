@@ -12,7 +12,7 @@ const ASSETS = [{
     },
     {
         name: 'AuntyResting',
-        url: '/assets/img/AuntyResting.png',
+        url: 'assets/img/AuntyResting.png',
         type: 'img'
     },
     {
