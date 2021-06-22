@@ -112,6 +112,9 @@ class Peekaboo {
         this.currentSceneIdx = idx;
         idx = idx.toString();
         let scene = this.script[idx];
+        if (!scene) {
+            this.gameOver();
+        }
         this.currentScene = scene;
         this.currentMode = scene.mode;
         this.currentDialogueIndex = 0;

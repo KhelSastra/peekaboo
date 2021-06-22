@@ -11,16 +11,6 @@ const ASSETS = [{
         type: 'txt'
     },
     {
-        name: 'posns',
-        url: '/assets/txt/ImagePositions.txt',
-        type: 'txt'
-    },
-    {
-        name: 'testAudio',
-        url: '/assets/audio/TestAudio.m4a',
-        type: 'audio'
-    },
-    {
         name: 'AuntyResting',
         url: '/assets/img/AuntyResting.png',
         type: 'img'
@@ -33,6 +23,11 @@ const ASSETS = [{
     {
         name: 'find1',
         url: '/assets/img/find1.png',
+        type: 'img'
+    },
+    {
+        name: 'baba',
+        url: '/assets/img/baba.png',
         type: 'img'
     }
 ]

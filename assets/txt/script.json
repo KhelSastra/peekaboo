@@ -15,7 +15,15 @@
             },
             {
                 "speaker": "Aunty",
-                "text": "Can you find the baba in the following image?"
+                "text": "I'm Mimi Mausi! I'm here to tell you about the city of Haridwar!"
+            },
+            {
+                "speaker": "Aunty",
+                "text": "Like you've read in the book, Haridwar along with Ujjain, Nashik and Prayagraj (Allahabad) is one of four sites where drops of Amrit, the elixir of immortality accidentally spilled over from the pitcher while being carried by the celestial bird Garuda. "
+            },
+            {
+                "speaker": "Aunty",
+                "text": "Can you find my friend Baba in this picture of Haridwar?"
             }
         ]
     },
@@ -30,5 +38,33 @@
             },
             "radius": 45
         }]
+    },
+    "2": {
+        "mode": "story",
+        "bg": "find1",
+        "sprites": [{
+            "name": "baba",
+            "position": {
+                "x": 538,
+                "y": 367
+            }
+        }],
+        "dialogues": [{
+                "speaker": "Baba",
+                "text": "Nice work finding me, kids!"
+            },
+            {
+                "speaker": "Baba",
+                "text": "In modern India, when people visit Haridwar, many of them are confused by us asking them for details. "
+            },
+            {
+                "speaker": "Baba",
+                "text": "I prefer, as do most Pandas, for people to come prepared after getting in touch with all of the one's extended family and bringing all relevant details regarding one's ancestral district and village, names of grandparents and great grandparents and marriages, births and deaths that have occurred in the family."
+            },
+            {
+                "speaker": "Baba",
+                "text": "This is our sacred profession and we, as keepers of history, take great pride in it."
+            }
+        ]
     }
 }
