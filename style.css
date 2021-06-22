@@ -88,6 +88,7 @@ body {
     border: none;
     font-size: 0.8rem;
     border-radius: 0.25rem;
+    transition-duration: 0.2s;
 }
 
 #vn-buttons button :not(:last-child) {
@@ -145,6 +146,7 @@ body {
     padding-top: 0.3em;
     padding-bottom: 0.3em;
     border: none;
+    transition-duration: 0.2s;
 }
 
 #alert>*>button:hover,

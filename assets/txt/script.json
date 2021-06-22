@@ -15,12 +15,20 @@
             },
             {
                 "speaker": "Aunty",
-                "text": "Second dialogue"
+                "text": "Can you find the baba in the following image?"
             }
         ]
     },
 
     "1": {
-        "mode": "find"
+        "mode": "find",
+        "bg": "find1",
+        "rings": [{
+            "center": {
+                "x": 198,
+                "y": 615
+            },
+            "radius": 45
+        }]
     }
 }

@@ -29,6 +29,11 @@ const ASSETS = [{
         name: 'Mandala',
         url: '/assets/img/Mandala.png',
         type: 'img'
+    },
+    {
+        name: 'find1',
+        url: '/assets/img/find1.png',
+        type: 'img'
     }
 ]
 

@@ -27,6 +27,8 @@ class Peekaboo {
         this.currentSprites = [];
         this.currentScene = null;
         this.currentMode = 'story';
+        this.foundImages = 0;
+        this.toFindCount = 0;
         this.currentDialogueIndex = 0;
 
         this.prevBtn.onclick = (e) => {
@@ -39,6 +41,8 @@ class Peekaboo {
                 if (Object.keys(this.script).length > this.currentSceneIdx) {
                     this.setScene(this.currentSceneIdx + 1);
                     this.draw();
+                } else {
+                    this.gameOver();
                 }
             } else {
                 this.draw();
@@ -113,12 +117,15 @@ class Peekaboo {
         this.currentScene = scene;
         this.currentMode = scene.mode;
         this.currentDialogueIndex = 0;
+        this.foundImages = 0;
     }
 
     draw() {
         if (!this.started) return;
-        this.drawBg(this.currentScene.bg);
+        this.ctx.clearRect(0, 0, CANVAS_SIZE.x, CANVAS_SIZE.y);
+        if (this.currentScene.bg) this.drawBg(this.currentScene.bg);
         if (this.currentMode === 'story') {
+            document.querySelector("#game").style.justifyContent = 'initial';
             this.canvas.style.cursor = 'default';
             this.vnContainer.style.display = 'flex';
             for (let sprite of this.currentScene.sprites) {
@@ -127,6 +134,7 @@ class Peekaboo {
             this.setCurrentDialogue(this.currentScene.dialogues[this.currentDialogueIndex]);
         } else if (this.currentMode = 'find') {
             this.vnContainer.style.display = 'none';
+            document.querySelector("#game").style.justifyContent = 'center';
             this.canvas.style.cursor = 'pointer';
         }
     }
@@ -182,6 +190,21 @@ class Peekaboo {
         if (e.button == 0) this.mouse.left = false;
         if (e.button == 1) this.mouse.middle = false;
         if (e.button == 2) this.mouse.right = false;
+
+        if (this.currentMode === 'find') {
+            let mouse = this.mouse;
+            let found = this.currentScene.rings.some(function(elem) {
+                return isPointInCircle(elem, mouse);
+            })
+            if (found) {
+                if (Object.keys(this.script).length > this.currentSceneIdx + 1) {
+                    this.setScene(this.currentSceneIdx + 1);
+                    this.draw();
+                } else {
+                    this.gameOver();
+                }
+            }
+        }
     }
 
     logMousePos() {
@@ -193,4 +216,16 @@ class Peekaboo {
             window.onmousemove = null;
         }
     }
+
+    gameOver() {
+        createAlert('Congratulations!', 'You finished the game! Amazing!', 'error');
+    }
+}
+
+function distance(p1, p2) {
+    return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+}
+
+function isPointInCircle(circle, point) {
+    return distance(circle.center, point) < circle.radius;
 }
