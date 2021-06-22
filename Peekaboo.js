@@ -27,8 +27,6 @@ class Peekaboo {
         this.currentSprites = [];
         this.currentScene = null;
         this.currentMode = 'story';
-        this.foundImages = 0;
-        this.toFindCount = 0;
         this.currentDialogueIndex = 0;
 
         this.prevBtn.onclick = (e) => {
