@@ -72,9 +72,7 @@ class Peekaboo {
             this.onWindowResize(e);
         });
 
-        this.assets = new AssetManager(this, () => {
-            this.onLoad();
-        });
+        this.assets = new AssetManager(this);
 
         this.assets.queueItems(ASSETS);
     }
@@ -155,13 +153,19 @@ class Peekaboo {
 
     drawSprite(sprite) {
         let img = this.assets.getAsset(sprite.name);
-        this.ctx.drawImage(img, sprite.position.x, sprite.position.y);
+        if (!img) setTimeout(() => this.drawSprite(sprite), 100);
+        else {
+            this.ctx.drawImage(img, sprite.position.x, sprite.position.y);
+        }
     }
 
     drawBg(name) {
         let img = this.assets.getAsset(name);
-        this.ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, this.canvas.width, this.canvas.height);
-        this.currentImage = img;
+        if (!img) setTimeout(() => this.drawBg(name), 100);
+        else {
+            this.ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, this.canvas.width, this.canvas.height);
+            this.currentImage = img;
+        }
     }
 
     onWindowResize(e) {
@@ -193,7 +197,7 @@ class Peekaboo {
         if (e.button == 2) this.mouse.right = false;
 
         if (this.currentMode === 'find') {
-            let mouse = this.mouse;
+            let mouse = this.imgMousePos;
             let found = this.currentScene.rings.some(function(elem) {
                 return isPointInCircle(elem, mouse);
             })
