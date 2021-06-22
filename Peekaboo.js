@@ -6,44 +6,81 @@ class Peekaboo {
             x: 0,
             y: 0,
             left: false,
-            right: false
+            right: false,
+            middle: false
         }
 
         this.actualSize = {
-            width: CANVAS_SIZE.width,
-            height: CANVAS_SIZE.height
+            x: CANVAS_SIZE.x,
+            y: CANVAS_SIZE.y
         }
 
         this.canvas = document.querySelector(selector);
+        this.speakerNameDiv = document.querySelector('#vn-speaker-name');
+        this.vnContainer = document.querySelector('#vn-controls');
+        this.vnTextDiv = document.querySelector('#vn-text');
+        this.prevBtn = document.querySelector("#vn-prev");
+        this.nextBtn = document.querySelector("#vn-next");
+        this.loadingDiv = document.querySelector('#loading');
+        this.audioCtx = new AudioContext();
+        this.script = null;
+        this.currentSprites = [];
+        this.currentScene = null;
+        this.currentMode = 'story';
+        this.currentDialogueIndex = 0;
+
+        this.prevBtn.onclick = (e) => {
+            this.currentDialogueIndex -= 1;
+            this.draw();
+        }
+        this.nextBtn.onclick = (e) => {
+            this.currentDialogueIndex += 1;
+            if (this.currentDialogueIndex >= this.currentScene.dialogues.length) {
+                if (Object.keys(this.script).length > this.currentSceneIdx) {
+                    this.setScene(this.currentSceneIdx + 1);
+                    this.draw();
+                }
+            } else {
+                this.draw();
+            }
+        }
+
         this.ctx = this.canvas.getContext('2d');
 
-        this.canvas.width = CANVAS_SIZE.width;
-        this.canvas.height = CANVAS_SIZE.height;
+        this.canvas.width = CANVAS_SIZE.x;
+        this.canvas.height = CANVAS_SIZE.y;
 
         this.onWindowResize(null);
 
         this.updateActualSize();
 
-        this.canvas.addEventListener('mousemove', (e) => {
+        this.canvas.onmousemove = (e) => {
             this.onMouseMove(e);
-        });
+        };
+
+        this.canvas.onmousedown = (e) => {
+            this.onMouseDown(e);
+        }
+
+        this.canvas.onmouseup = (e) => {
+            this.onMouseUp(e);
+        }
 
         window.addEventListener('resize', (e) => {
             this.onWindowResize(e);
         });
 
-        this.audioCtx = new AudioContext();
-
         this.assets = new AssetManager(this, () => {
             this.onLoad();
         });
+
         this.assets.queueItems(ASSETS);
     }
 
     updateActualSize() {
         let style = window.getComputedStyle(this.canvas);
-        this.actualSize.width = parseInt(style.width);
-        this.actualSize.height = parseInt(style.height);
+        this.actualSize.x = parseInt(style.width);
+        this.actualSize.y = parseInt(style.height);
     }
 
     onLoad() {
@@ -53,50 +90,69 @@ class Peekaboo {
 
     onMouseMove(e) {
         let rect = this.canvas.getBoundingClientRect();
-        this.mouse.x = Math.round(((e.clientX - rect.left) / this.actualSize.width) * CANVAS_SIZE.width); // scale mouse x to be between 0 and CANVAS_SIZE
-        this.mouse.y = Math.round(((e.clientY - rect.top) / this.actualSize.height) * CANVAS_SIZE.height); // scale mouse y to be between 0 and CANVAS_SIZE
-
+        this.mouse.x = Math.round(((e.clientX - rect.left) / this.actualSize.x) * CANVAS_SIZE.x); // scale mouse x to be between 0 and CANVAS_SIZE
+        this.mouse.y = Math.round(((e.clientY - rect.top) / this.actualSize.y) * CANVAS_SIZE.y); // scale mouse y to be between 0 and CANVAS_SIZE
         this.imgMousePos = Boolean(this.currentImage) ? {
-            x: Math.round(this.mouse.x / CANVAS_SIZE.width * this.currentImage.width),
-            y: Math.round(this.mouse.y / CANVAS_SIZE.height * this.currentImage.height)
+            x: Math.round(this.mouse.x / CANVAS_SIZE.x * this.currentImage.width),
+            y: Math.round(this.mouse.y / CANVAS_SIZE.y * this.currentImage.height)
         } : null;
-        if (this.debug) {
-            console.log(this.mouse);
-            if (this.imgMousePos)
-                console.log(this.imgMousePos)
-        }
-    }
-
-    getImgHoverPos() {
-        return this.imgMousePos;
-    }
-
-    getMousePos() {
-        return {
-            x: this.mouse.x,
-            y: this.mouse.y
-        };
     }
 
     begin() {
         this.started = true;
         this.script = JSON.parse(this.assets.getAsset('script'));
-        let first = this.script['0'];
-        if (first.mode == 'find') this.setCurrentImage(first.background);
-        else if (first.mode == 'mode') {
+        this.setScene(0);
+        this.loadingDiv.style.display = 'none';
+        this.draw();
+    }
 
+    setScene(idx) {
+        this.currentSceneIdx = idx;
+        idx = idx.toString();
+        let scene = this.script[idx];
+        this.currentScene = scene;
+        this.currentMode = scene.mode;
+        this.currentDialogueIndex = 0;
+    }
+
+    draw() {
+        if (!this.started) return;
+        this.drawBg(this.currentScene.bg);
+        if (this.currentMode === 'story') {
+            this.canvas.style.cursor = 'default';
+            this.vnContainer.style.display = 'flex';
+            for (let sprite of this.currentScene.sprites) {
+                this.drawSprite(sprite);
+            }
+            this.setCurrentDialogue(this.currentScene.dialogues[this.currentDialogueIndex]);
+        } else if (this.currentMode = 'find') {
+            this.vnContainer.style.display = 'none';
+            this.canvas.style.cursor = 'pointer';
         }
     }
 
-    setCurrentImage(name) {
+    setCurrentDialogue(dialogue) {
+        this.speakerNameDiv.innerHTML = dialogue.speaker;
+        this.vnTextDiv.innerHTML = dialogue.text;
+    }
+
+    setBgGradient(c1, c2) {
+        let gradient = this.ctx.createLinearGradient(0, 0, CANVAS_SIZE.x, CANVAS_SIZE.y);
+        gradient.addColorStop(0, c1);
+        gradient.addColorStop(1, c2);
+        this.ctx.fillStyle = gradient;
+        this.ctx.fillRect(0, 0, CANVAS_SIZE.x, CANVAS_SIZE.y);
+    }
+
+    drawSprite(sprite) {
+        let img = this.assets.getAsset(sprite.name);
+        this.ctx.drawImage(img, sprite.position.x, sprite.position.y);
+    }
+
+    drawBg(name) {
         let img = this.assets.getAsset(name);
         this.ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, this.canvas.width, this.canvas.height);
         this.currentImage = img;
-    }
-
-    drawSprite(name, position) {
-        let img = this.assets.getAsset(name);
-        this.ctx.drawImage(img, position.x, position.y);
     }
 
     onWindowResize(e) {
@@ -107,10 +163,34 @@ class Peekaboo {
 
         while (computedWidth > document.body.clientWidth * 0.95) {
             computedWidth -= epsilon;
-            computedHeight -= epsilon;
+            computedHeight -= 0.5625 * epsilon;
         }
 
         this.canvas.style.width = computedWidth + 'px';
         this.canvas.style.height = computedHeight + 'px';
+    }
+
+    onMouseDown(e) {
+        e.preventDefault()
+        if (e.button == 0) this.mouse.left = true;
+        if (e.button == 1) this.mouse.middle = true;
+        if (e.button == 2) this.mouse.right = true;
+    }
+
+    onMouseUp(e) {
+        e.preventDefault()
+        if (e.button == 0) this.mouse.left = false;
+        if (e.button == 1) this.mouse.middle = false;
+        if (e.button == 2) this.mouse.right = false;
+    }
+
+    logMousePos() {
+        if (!this.isLoggingMousePos) {
+            window.onmousemove = () => {
+                console.log(this.mouse)
+            }
+        } else {
+            window.onmousemove = null;
+        }
     }
 }

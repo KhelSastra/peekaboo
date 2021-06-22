@@ -1,8 +1,8 @@
 window.onload = init;
 const MIN_ASPECT_RATIO = 1.2;
 const CANVAS_SIZE = {
-    width: 1920,
-    height: 1080
+    x: 1280,
+    y: 720
 }
 
 const ASSETS = [{
@@ -16,11 +16,6 @@ const ASSETS = [{
         type: 'txt'
     },
     {
-        name: 'scene1Bg',
-        url: '/assets/img/GangesTest.jpeg',
-        type: 'img'
-    },
-    {
         name: 'testAudio',
         url: '/assets/audio/TestAudio.m4a',
         type: 'audio'
@@ -28,6 +23,11 @@ const ASSETS = [{
     {
         name: 'AuntyResting',
         url: '/assets/img/AuntyResting.png',
+        type: 'img'
+    },
+    {
+        name: 'Mandala',
+        url: '/assets/img/Mandala.png',
         type: 'img'
     }
 ]
@@ -46,19 +46,19 @@ Array.prototype.remove = function(v) {
 }
 
 function init() {
-    let game = new Peekaboo('#game-canvas');
+    window.game = new Peekaboo('#game-canvas');
     if (isAspectTooNarrow()) {
         console.log('test');
         window.addEventListener('resize', () => {
-            if (!isAspectTooNarrow() && !game.started) {
+            if (!isAspectTooNarrow() && !window.game.started) {
                 init();
             }
         });
         return;
     }
-    game.assets.onLoad = function() {
-        game.onLoad();
+    window.game.assets.onLoad = function() {
+        window.game.onLoad();
     }
-    game.assets.loadAll();
-    game.debug = true;
+    window.game.assets.loadAll();
+    window.game.debug = true;
 }

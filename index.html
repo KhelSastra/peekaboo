@@ -6,10 +6,13 @@
     <title>Peekaboo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel='stylesheet' href='style.css'>
+    <link rel='stylesheet' href='alert.css'>
     <meta charset='UTF-8'>
 </head>
 
 <body>
+    <script src='alert.js'>
+    </script>
     <script src='init.js'>
     </script>
     <script src='Audio.js'>
@@ -18,13 +21,20 @@
     </script>
     <script src='AssetManager.js'>
     </script>
-    <div id='block'>
+    <div id='block' class='fullscreen'>
         Please rotate your device to landscape mode to play.
+    </div>
+
+    <div id='loading' class='fullscreen'>
+        Loading...
     </div>
     <div id="game">
         <canvas id='game-canvas'>
         </canvas>
-        <div id='visual-novel-controls'>
+        <div id='vn-controls'>
+            <div id='vn-speaker-name'>
+                Aunty
+            </div>
             <div id='vn-text'>
                 test
             </div>

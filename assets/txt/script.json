@@ -1,14 +1,26 @@
 {
     "0": {
-        "mode": "novel",
-        "dialogues": {
-            "speaker": "Aunty",
-            "sprite": {
-                "name": "AuntyResting",
-                "position": {
-
-                }
+        "mode": "story",
+        "bg": "Mandala",
+        "sprites": [{
+            "name": "AuntyResting",
+            "position": {
+                "x": 496,
+                "y": 200
             }
-        }
+        }],
+        "dialogues": [{
+                "speaker": "Aunty",
+                "text": "Hello, kids!"
+            },
+            {
+                "speaker": "Aunty",
+                "text": "Second dialogue"
+            }
+        ]
+    },
+
+    "1": {
+        "mode": "find"
     }
 }
