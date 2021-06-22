@@ -7,7 +7,7 @@ const CANVAS_SIZE = {
 
 const ASSETS = [{
         name: 'script',
-        url: '/assets/txt/script.json',
+        url: 'assets/txt/script.json',
         type: 'txt'
     },
     {
@@ -17,17 +17,17 @@ const ASSETS = [{
     },
     {
         name: 'Mandala',
-        url: '/assets/img/Mandala.png',
+        url: 'assets/img/Mandala.png',
         type: 'img'
     },
     {
         name: 'find1',
-        url: '/assets/img/find1.png',
+        url: 'assets/img/find1.png',
         type: 'img'
     },
     {
         name: 'baba',
-        url: '/assets/img/baba.png',
+        url: 'assets/img/baba.png',
         type: 'img'
     }
 ]
