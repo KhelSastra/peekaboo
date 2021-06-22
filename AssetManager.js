@@ -1,13 +1,16 @@
 class AssetManager {
-    constructor(parent, callback) {
+    constructor(parent) {
         this.queue = [];
         this.successCount = 0;
         this.results = {};
-        this.callback = callback;
         this.parent = parent;
+        this.onLoad = null;
     }
 
     loadAll() {
+        if (this.onLoad == null) {
+            throw new Error("AssetManager: callback not set");
+        }
         let that = this;
         that.numFiles = that.queue.length;
         for (let x of this.queue) {
@@ -23,7 +26,7 @@ class AssetManager {
                         }).then(function() {
                             that.successCount++;
                             if (that.isDone()) {
-                                that.callback();
+                                that.onLoad();
                             }
                         });
                     } else if (x.type === 'audio') {
@@ -32,17 +35,16 @@ class AssetManager {
                         }).then(function() {
                             that.successCount++;
                             if (that.isDone()) {
-                                that.callback();
+                                that.onLoad();
                             }
                         });
                     } else {
                         res.text().then((result) => {
-                            console.log(result);
                             that.results[x.name] = result;
                         }).then(function() {
                             that.successCount++;
                             if (that.isDone()) {
-                                that.callback();
+                                that.onLoad();
                             }
                         });
                     }

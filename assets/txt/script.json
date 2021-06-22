@@ -1,5 +1,14 @@
 {
     "0": {
-        "background": "scene1Bg"
+        "mode": "novel",
+        "dialogues": {
+            "speaker": "Aunty",
+            "sprite": {
+                "name": "AuntyResting",
+                "position": {
+
+                }
+            }
+        }
     }
 }
