@@ -145,7 +145,7 @@ class Peekaboo {
 
     drawSprite(sprite) {
         let img = this.assets.getAsset(sprite.name);
-        if (!img) setTimeout(() => this.drawSprite(sprite), 100);
+        if (!img) setTimeout(() => this.draw(), 100);
         else {
             this.ctx.drawImage(img, sprite.position.x, sprite.position.y);
         }
@@ -153,10 +153,9 @@ class Peekaboo {
 
     drawBg(name) {
         let img = this.assets.getAsset(name);
-        if (!img) setTimeout(() => this.drawBg(name), 100);
+        if (!img) setTimeout(() => this.draw(), 100);
         else {
             this.ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, this.canvas.width, this.canvas.height);
-            this.currentImage = img;
         }
     }
 
