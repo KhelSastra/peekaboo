@@ -58,9 +58,6 @@ class AssetManager {
         for (let x of arr) {
             if (!this.queue.includes(x))
                 this.queue.push(x);
-
-
-
         }
     }
 

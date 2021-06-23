@@ -104,34 +104,34 @@ body {
     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
 
-@media (min-aspect-ratio: 18/9) {
-    #vn-controls {
-        width: 92%;
-        padding: 0.4rem;
-        height: 25%;
-        margin-bottom: 0.2rem;
-    }
+/* TODO: FIX THIS MOBILE BUSINESS! */
 
-    #vn-speaker-name {
-        margin-bottom: auto;
-        font-size: 0.8rem;
-        transform: translate(0, -0.2rem);
-    }
+#vn-controls.mobile {
+    width: 92%;
+    padding: 0.4rem;
+    height: 25%;
+    margin-bottom: 0.2rem;
+}
 
-    #vn-buttons button {
-        padding: 0.1rem;
-        margin: 0.3rem;
-    }
+#vn-speaker-name.mobile {
+    margin-bottom: auto;
+    font-size: 0.8rem;
+    transform: translate(0, -0.2rem);
+}
 
-    #vn-text {
-        height: 90%;
-        font-size: 0.8rem;
-        margin-left: 0.5rem;
-    }
+#vn-buttons.mobile button {
+    padding: 0.1rem;
+    margin: 0.3rem;
+}
 
-    #game-canvas {
-        margin-top: 0.1rem;
-    }
+#vn-text.mobile {
+    height: 90%;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+#game-canvas.mobile {
+    margin-top: 0.1rem;
 }
 
 .fullscreen {
