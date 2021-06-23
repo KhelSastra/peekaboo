@@ -10,11 +10,6 @@ class Peekaboo {
             middle: false
         }
 
-        this.actualSize = {
-            x: CANVAS_SIZE.x,
-            y: CANVAS_SIZE.y
-        }
-
         this.canvas = document.querySelector(selector);
         this.speakerNameDiv = document.querySelector('#vn-speaker-name');
         this.vnContainer = document.querySelector('#vn-controls');
@@ -61,8 +56,6 @@ class Peekaboo {
 
         this.onWindowResize(null);
 
-        this.updateActualSize();
-
         this.canvas.onmousemove = (e) => {
             this.onMouseMove(e);
         };
@@ -82,12 +75,6 @@ class Peekaboo {
         this.assets = new AssetManager(this);
 
         this.assets.queueItems(ASSETS);
-    }
-
-    updateActualSize() {
-        let style = window.getComputedStyle(this.canvas);
-        this.actualSize.x = parseInt(style.width);
-        this.actualSize.y = parseInt(style.height);
     }
 
     onLoad() {
@@ -182,6 +169,11 @@ class Peekaboo {
         while (computedWidth > document.body.clientWidth * 0.95) {
             computedWidth -= epsilon;
             computedHeight -= 0.5625 * epsilon;
+        }
+
+        this.actualSize = {
+            x: computedWidth,
+            y: computedHeight
         }
 
         this.canvas.style.width = computedWidth + 'px';
