@@ -99,10 +99,6 @@ class Peekaboo {
         let rect = this.canvas.getBoundingClientRect();
         this.mouse.x = Math.round(((e.clientX - rect.left) / this.actualSize.x) * CANVAS_SIZE.x); // scale mouse x to be between 0 and CANVAS_SIZE
         this.mouse.y = Math.round(((e.clientY - rect.top) / this.actualSize.y) * CANVAS_SIZE.y); // scale mouse y to be between 0 and CANVAS_SIZE
-        this.imgMousePos = Boolean(this.currentImage) ? {
-            x: Math.round(this.mouse.x / CANVAS_SIZE.x * this.currentImage.width),
-            y: Math.round(this.mouse.y / CANVAS_SIZE.y * this.currentImage.height)
-        } : null;
     }
 
     begin() {
@@ -206,8 +202,8 @@ class Peekaboo {
         if (e.button == 2) this.mouse.right = false;
 
         if (this.currentMode === 'find') {
-            let mouse = this.imgMousePos;
-            let found = this.currentScene.rings.some(function(elem) {
+            let mouse = this.mouse;
+            let found = this.currentScene.rings.some((elem) => {
                 return isPointInCircle(elem, mouse);
             })
             if (found) {
