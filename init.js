@@ -29,6 +29,26 @@ const ASSETS = [{
         name: 'baba',
         url: 'assets/img/baba.png',
         type: 'img'
+    },
+    {
+        name: 'RiverScene1',
+        url: 'assets/img/River1.jpg',
+        type: 'img'
+    },
+    {
+        name: 'GangaAartiDay',
+        url: 'assets/img/GangaAarti.png',
+        type: 'img'
+    },
+    {
+        name: 'GangaAartiNight',
+        url: 'assets/img/GangaAartiNight.png',
+        type: 'img'
+    },
+    {
+        name: 'GangaAartiSolo',
+        url: 'assets/img/GangaAartiSolo.png',
+        type: 'img'
     }
 ]
 

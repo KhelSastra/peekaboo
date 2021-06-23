@@ -30,7 +30,14 @@ class Peekaboo {
         this.currentDialogueIndex = 0;
 
         this.prevBtn.onclick = (e) => {
-            this.currentDialogueIndex -= 1;
+            if (this.currentDialogueIndex > 0) this.currentDialogueIndex -= 1;
+            else {
+                if (this.currentSceneIdx > 0 && this.currentScene.dialogues) {
+                    this.setScene(this.currentSceneIdx - 1);
+                    this.currentDialogueIndex = this.currentScene.dialogues.length - 1;
+                    this.draw();
+                }
+            }
             this.draw();
         }
         this.nextBtn.onclick = (e) => {
@@ -112,6 +119,7 @@ class Peekaboo {
         let scene = this.script[idx];
         if (!scene) {
             this.gameOver();
+            return;
         }
         this.currentScene = scene;
         this.currentMode = scene.mode;
@@ -139,6 +147,7 @@ class Peekaboo {
     }
 
     setCurrentDialogue(dialogue) {
+        if (!dialogue) return;
         this.speakerNameDiv.innerHTML = dialogue.speaker;
         this.vnTextDiv.innerHTML = dialogue.text;
     }

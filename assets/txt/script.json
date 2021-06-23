@@ -41,7 +41,7 @@
     },
     "2": {
         "mode": "story",
-        "bg": "find1",
+        "bg": "Mandala",
         "sprites": [{
             "name": "baba",
             "position": {
@@ -55,16 +55,137 @@
             },
             {
                 "speaker": "Baba",
+                "text": "Centuries ago, when Hindus visited the holy town of Haridwar, they used to go to the Pandit in charge of one's family register and update the family tree with details of all marriages, births, and deaths from ones extended joint family."
+            },
+            {
+                "speaker": "Baba",
+                "text": "I'm Baba, one of those Pandits. This is a tradition kept alive and honoured by people like me."
+            }
+        ]
+    },
+    "3": {
+        "mode": "story",
+        "bg": "RiverScene1",
+        "sprites": [{
+            "name": "baba",
+            "position": {
+                "x": 538,
+                "y": 367
+            }
+        }],
+        "dialogues": [{
+                "speaker": "Baba",
                 "text": "In modern India, when people visit Haridwar, many of them are confused by us asking them for details. "
             },
             {
                 "speaker": "Baba",
-                "text": "I prefer, as do most Pandas, for people to come prepared after getting in touch with all of the one's extended family and bringing all relevant details regarding one's ancestral district and village, names of grandparents and great grandparents and marriages, births and deaths that have occurred in the family."
+                "text": "I prefer, as do most Pandas, for people to come prepared after getting in touch with all of the one's extended family,"
+            },
+            {
+                "speaker": "Baba",
+                "text": "and bringing all relevant details regarding one's ancestral district and village, names of grandparents and great grandparents and marriages, births and deaths that have occurred in the family."
             },
             {
                 "speaker": "Baba",
                 "text": "This is our sacred profession and we, as keepers of history, take great pride in it."
+            },
+            {
+                "speaker": "Baba",
+                "text": "Bye now!"
             }
         ]
+    },
+    "4": {
+        "mode": "story",
+        "bg": "Mandala",
+        "sprites": [{
+            "name": "AuntyResting",
+            "position": {
+                "x": 496,
+                "y": 200
+            }
+        }],
+        "dialogues": [{
+                "speaker": "Aunty",
+                "text": "Why did you let Baba go, child? Now who'll tell you about the Ganga Aarti?"
+            },
+            {
+                "speaker": "Aunty",
+                "text": "You'd better go find him again!"
+            }
+        ]
+    },
+    "5": {
+        "mode": "find",
+        "bg": "RiverScene1",
+        "rings": [{
+            "center": {
+                "x": 65,
+                "y": 250
+            },
+            "radius": 20
+        }]
+    },
+    "6": {
+        "mode": "story",
+        "bg": "RiverScene1",
+        "sprites": [{
+            "name": "baba",
+            "position": {
+                "x": 538,
+                "y": 367
+            }
+        }],
+        "dialogues": [{
+                "speaker": "Baba",
+                "text": "Oh, hey, did you need me for something else?"
+            },
+            {
+                "speaker": "Baba",
+                "text": "Hmm. The Ganga Aarti. Sure, I'll tell you about it!"
+            }
+        ]
+    },
+    "7": {
+        "mode": "story",
+        "bg": "GangaAartiDay",
+        "sprites": [],
+        "dialogues": [{
+            "speaker": "Baba",
+            "text": "Ganga Aarti is the major attraction of this place. It's breathtaking in person."
+        }]
+    },
+    "8": {
+        "mode": "story",
+        "bg": "GangaAartiNight",
+        "sprites": [],
+        "dialogues": [{
+            "speaker": "Baba",
+            "text": "The lights and shadows, the mantras and just the aura of the place paint a picture of an exotic dreamland."
+        }]
+    },
+    "9": {
+        "mode": "story",
+        "bg": "GangaAartiSolo",
+        "sprites": [],
+        "dialogues": [{
+            "speaker": "Baba",
+            "text": "We do this everyday at dusk to honour and cherish Mother Ganga, from whose lap life springs."
+        }]
+    },
+    "10": {
+        "mode": "story",
+        "sprites": [{
+            "name": "baba",
+            "position": {
+                "x": 538,
+                "y": 367
+            }
+        }],
+        "bg": "RiverScene1",
+        "dialogues": [{
+            "speaker": "Baba",
+            "text": "Off you go, kiddo! Find someone else to pester. A shopkeeper, maybe?"
+        }]
     }
 }
