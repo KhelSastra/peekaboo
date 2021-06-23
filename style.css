@@ -108,14 +108,14 @@ body {
     #vn-controls {
         width: 92%;
         padding: 0.4rem;
-        height: 30%;
-        margin-bottom: 0;
+        height: 25%;
+        margin-bottom: 0.2rem;
     }
 
     #vn-speaker-name {
         margin-bottom: auto;
         font-size: 0.8rem;
-        transform: translate(0, -0.6rem);
+        transform: translate(0, -0.2rem);
     }
 
     #vn-buttons button {
@@ -130,7 +130,7 @@ body {
     }
 
     #game-canvas {
-        margin-top: 0.3rem;
+        margin-top: 0.1rem;
     }
 }
 
