@@ -104,9 +104,33 @@ body {
     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
 
-@media (max-aspect-ratio: 107/75) {
-    #visual-novel-controls {
-        width: 80%;
+@media (min-aspect-ratio: 18/9) {
+    #vn-controls {
+        width: 92%;
+        padding: 0.4rem;
+        height: 30%;
+        margin-bottom: 0;
+    }
+
+    #vn-speaker-name {
+        margin-bottom: auto;
+        font-size: 0.8rem;
+        transform: translate(0, -0.6rem);
+    }
+
+    #vn-buttons button {
+        padding: 0.1rem;
+        margin: 0.3rem;
+    }
+
+    #vn-text {
+        height: 90%;
+        font-size: 0.8rem;
+        margin-left: 0.5rem;
+    }
+
+    #game-canvas {
+        margin-top: 0.3rem;
     }
 }
 
