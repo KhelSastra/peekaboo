@@ -17,12 +17,19 @@ class Peekaboo {
         this.prevBtn = document.querySelector("#vn-prev");
         this.nextBtn = document.querySelector("#vn-next");
         this.loadingDiv = document.querySelector('#loading');
+        this.vnButtons = document.querySelector('#vn-buttons');
         this.audioCtx = new AudioContext();
         this.script = null;
         this.currentSprites = [];
         this.currentScene = null;
         this.currentMode = 'story';
         this.currentDialogueIndex = 0;
+
+        if (isMobile()) {
+            for (let elem of [this.speakerNameDiv, this.vnContainer, this.vnTextDiv, this.vnButtons, this.canvas]) {
+                elem.classList.add('mobile');
+            }
+        }
 
         this.prevBtn.onclick = (e) => {
             if (this.currentDialogueIndex > 0) this.currentDialogueIndex -= 1;

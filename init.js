@@ -56,6 +56,10 @@ function isAspectTooNarrow() {
     return (window.innerWidth / window.innerHeight) < MIN_ASPECT_RATIO;
 }
 
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 Array.prototype.remove = function(v) {
     let idx = this.indexOf(v);
     if (idx != -1) {
