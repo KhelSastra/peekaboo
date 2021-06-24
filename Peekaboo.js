@@ -19,6 +19,7 @@ class Peekaboo {
         this.loadingDiv = document.querySelector('#loading');
         this.vnButtons = document.querySelector('#vn-buttons');
         this.audioCtx = new AudioContext();
+        this.audio = new Audio(this);
         this.script = null;
         this.currentSprites = [];
         this.currentScene = null;
