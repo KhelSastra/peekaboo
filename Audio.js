@@ -17,6 +17,7 @@ class Audio {
         this.currentSourceNode = src;
         this.musicPlaying = true;
     }
+    
     playSFX(filename) {
         let src = this.parent.audioCtx.createBufferSource();
         src.buffer = this.parent.assets.getAsset(filename);

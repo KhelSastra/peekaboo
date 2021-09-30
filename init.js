@@ -5,7 +5,8 @@ const CANVAS_SIZE = {
     y: 720
 }
 
-const ASSETS = [{
+const ASSETS = [
+    {
         name: 'script',
         url: 'assets/txt/script.json',
         type: 'txt'
