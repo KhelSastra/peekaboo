@@ -24,6 +24,11 @@ const ASSETS = [
     },
     {
         name: 'MahabCrowd',
+        url: 'assets/img/MahabCrowd_NoBaba.png',
+        type: 'img'
+    },
+    {
+        name: 'MahabCrowdWithBaba',
         url: 'assets/img/MahabCrowd.png',
         type: 'img'
     },
@@ -35,6 +40,11 @@ const ASSETS = [
     {
         name: "Baba",
         url: "assets/img/baba.png",
+        type: 'img'
+    },
+    {
+        name: "BabaLarge",
+        url: "assets/img/baba_large.png",
         type: 'img'
     }
 ]

@@ -71,7 +71,7 @@
     },
     "2": {
         "mode": "find",
-        "bg": "MahabCrowd",
+        "bg": "MahabCrowdWithBaba",
         "rings": [
             {
                 "center": {
@@ -87,10 +87,10 @@
         "bg": "MahabCrowd",
         "sprites": [
             {
-                "name": "Baba",
+                "name": "BabaLarge",
                 "position": {
-                    "x": 180,
-                    "y": 200
+                    "x": 500,
+                    "y": 270
                 }
             }
         ],
