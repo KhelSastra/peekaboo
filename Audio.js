@@ -4,7 +4,7 @@ class Audio {
         this.musicPlaying = false;
     }
 
-    static playMusicFile(filename) {
+    static playMusicFile(filename, loop = false) {
         if (this.musicPlaying) {
             this.musicPlaying = false;
             this.currentSourceNode.stop();
@@ -12,12 +12,12 @@ class Audio {
         let src = this.parent.audioCtx.createBufferSource();
         src.buffer = this.parent.assets.getAsset(filename);
         src.connect(this.parent.audioCtx.destination);
-        src.loop = true;
+        src.loop = loop;
         src.start();
         this.currentSourceNode = src;
         this.musicPlaying = true;
     }
-    
+
     playSFX(filename) {
         let src = this.parent.audioCtx.createBufferSource();
         src.buffer = this.parent.assets.getAsset(filename);
