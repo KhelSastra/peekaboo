@@ -78,7 +78,13 @@ function init() {
         return;
     }
     window.game.assets.onLoad = function() {
-        window.game.onLoad();
+        if ('requestFullscreen' in document.documentElement) {
+            document.documentElement.requestFullscreen().then(() => {
+                window.game.onLoad();
+            }).catch(err => {
+                createAlert("Error", "You must allow fullscreen to play. Refresh the page and try again.", "error");
+            });
+        }
     }
     window.game.assets.loadAll();
     window.game.debug = true;
