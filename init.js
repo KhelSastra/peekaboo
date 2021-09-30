@@ -1,4 +1,5 @@
 window.onload = init;
+
 const MIN_ASPECT_RATIO = 1.2;
 const CANVAS_SIZE = {
     x: 1280,
@@ -8,7 +9,7 @@ const CANVAS_SIZE = {
 const ASSETS = [
     {
         name: 'script',
-        url: 'assets/txt/script.json',
+        url: 'assets/txt/mahabalipuram.json',
         type: 'txt'
     },
     {
@@ -18,37 +19,17 @@ const ASSETS = [
     },
     {
         name: 'Mandala',
-        url: 'assets/img/Mandala.png',
+        url: 'assets/img/MandalaBeige.png',
         type: 'img'
     },
     {
-        name: 'find1',
-        url: 'assets/img/find1.png',
+        name: 'MahabCrowd',
+        url: 'assets/img/MahabCrowd.png',
         type: 'img'
     },
     {
-        name: 'baba',
-        url: 'assets/img/baba.png',
-        type: 'img'
-    },
-    {
-        name: 'RiverScene1',
-        url: 'assets/img/River1.jpg',
-        type: 'img'
-    },
-    {
-        name: 'GangaAartiDay',
-        url: 'assets/img/GangaAarti.png',
-        type: 'img'
-    },
-    {
-        name: 'GangaAartiNight',
-        url: 'assets/img/GangaAartiNight.png',
-        type: 'img'
-    },
-    {
-        name: 'GangaAartiSolo',
-        url: 'assets/img/GangaAartiSolo.png',
+        name: 'Mahab1',
+        url: 'assets/img/Mahab1.png',
         type: 'img'
     }
 ]
