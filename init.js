@@ -31,6 +31,11 @@ const ASSETS = [
         name: 'Mahab1',
         url: 'assets/img/Mahab1.png',
         type: 'img'
+    },
+    {
+        name: "Baba",
+        url: "assets/img/baba.png",
+        type: 'img'
     }
 ]
 

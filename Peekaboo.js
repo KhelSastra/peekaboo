@@ -37,7 +37,7 @@ class Peekaboo {
             else {
                 if (this.currentSceneIdx > 0 && this.currentScene.dialogues) {
                     this.setScene(this.currentSceneIdx - 1);
-                    this.currentDialogueIndex = this.currentScene.dialogues.length - 1;
+                    this.currentDialogueIndex = (this.currentScene.dialogues?.length || 1) - 1;
                     this.draw();
                 }
             }
@@ -227,7 +227,7 @@ class Peekaboo {
     }
 
     gameOver() {
-        createAlert('Congratulations!', 'You finished the game! Amazing!', 'error');
+        createAlert('வாழ்த்துக்கள்!', 'நீங்கள் விளையாட்டை முடித்துவிட்டீர்கள்', 'error');
     }
 }
 
