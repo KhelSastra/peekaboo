@@ -23,7 +23,7 @@ const ASSETS = [
         type: 'img'
     },
     {
-        name: 'MahabCrowd',
+        name: 'MahabCrowdNoBaba',
         url: 'assets/img/MahabCrowd_NoBaba.png',
         type: 'img'
     },

@@ -84,7 +84,7 @@
     },
     "3": {
         "mode": "story",
-        "bg": "MahabCrowd",
+        "bg": "MahabCrowdNoBaba",
         "sprites": [
             {
                 "name": "BabaLarge",
