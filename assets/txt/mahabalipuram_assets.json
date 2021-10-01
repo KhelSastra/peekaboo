@@ -1,0 +1,42 @@
+[
+    {
+        "name": "script",
+        "url": "assets/txt/mahabalipuram.json",
+        "type": "txt"
+    },
+    {
+        "name": "AuntyResting",
+        "url": "assets/img/AuntyResting.png",
+        "type": "img"
+    },
+    {
+        "name": "Mandala",
+        "url": "assets/img/MandalaBeige.png",
+        "type": "img"
+    },
+    {
+        "name": "MahabCrowdNoBaba",
+        "url": "assets/img/MahabCrowd_NoBaba.png",
+        "type": "img"
+    },
+    {
+        "name": "MahabCrowdWithBaba",
+        "url": "assets/img/MahabCrowd.png",
+        "type": "img"
+    },
+    {
+        "name": "Mahab1",
+        "url": "assets/img/Mahab1.png",
+        "type": "img"
+    },
+    {
+        "name": "Baba",
+        "url": "assets/img/baba.png",
+        "type": "img"
+    },
+    {
+        "name": "BabaLarge",
+        "url": "assets/img/baba_large.png",
+        "type": "img"
+    }
+]

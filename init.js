@@ -6,49 +6,6 @@ const CANVAS_SIZE = {
     y: 720
 }
 
-const ASSETS = [
-    {
-        name: 'script',
-        url: 'assets/txt/mahabalipuram.json',
-        type: 'txt'
-    },
-    {
-        name: 'AuntyResting',
-        url: 'assets/img/AuntyResting.png',
-        type: 'img'
-    },
-    {
-        name: 'Mandala',
-        url: 'assets/img/MandalaBeige.png',
-        type: 'img'
-    },
-    {
-        name: 'MahabCrowdNoBaba',
-        url: 'assets/img/MahabCrowd_NoBaba.png',
-        type: 'img'
-    },
-    {
-        name: 'MahabCrowdWithBaba',
-        url: 'assets/img/MahabCrowd.png',
-        type: 'img'
-    },
-    {
-        name: 'Mahab1',
-        url: 'assets/img/Mahab1.png',
-        type: 'img'
-    },
-    {
-        name: "Baba",
-        url: "assets/img/baba.png",
-        type: 'img'
-    },
-    {
-        name: "BabaLarge",
-        url: "assets/img/baba_large.png",
-        type: 'img'
-    }
-]
-
 function isAspectTooNarrow() {
     return (window.innerWidth / window.innerHeight) < MIN_ASPECT_RATIO;
 }
@@ -67,19 +24,19 @@ Array.prototype.remove = function(v) {
 }
 
 function init() {
-    window.game = new Peekaboo('#game-canvas');
-    if (isAspectTooNarrow()) {
-        console.log('test');
-        window.addEventListener('resize', () => {
-            if (!isAspectTooNarrow() && !window.game.started) {
-                init();
-            }
-        });
-        return;
-    }
-    window.game.assets.onLoad = function() {
-        window.game.onLoad();
-    }
-    window.game.assets.loadAll();
-    window.game.debug = true;
+    fetch('assets/txt/mahabalipuram_assets.json')
+    .then(value => value.json())
+    .then(assets => {
+        window.game = new Peekaboo('#game-canvas', assets);
+        if (isAspectTooNarrow()) {
+            window.addEventListener('resize', () => {
+                if (!isAspectTooNarrow() && !window.game.started) {
+                    init();
+                }
+            });
+            return;
+        }
+        
+        window.game.debug = true;
+    })
 }
