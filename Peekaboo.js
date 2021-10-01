@@ -46,7 +46,7 @@ class Peekaboo {
         this.nextBtn.onclick = (e) => {
             this.currentDialogueIndex += 1;
             if (this.currentDialogueIndex >= this.currentScene.dialogues.length) {
-                if (Object.keys(this.script).length > this.currentSceneIdx) {
+                if (this.script.scenes.length > this.currentSceneIdx) {
                     this.setScene(this.currentSceneIdx + 1);
                     this.draw();
                 } else {
@@ -106,8 +106,7 @@ class Peekaboo {
 
     setScene(idx) {
         this.currentSceneIdx = idx;
-        idx = idx.toString();
-        let scene = this.script[idx];
+        let scene = this.script.scenes[idx];
         if (!scene) {
             this.gameOver();
             return;
@@ -116,6 +115,11 @@ class Peekaboo {
         this.currentMode = scene.mode;
         this.currentDialogueIndex = 0;
         this.foundImages = 0;
+    }
+
+    drawScene(idx) {
+        this.setScene(idx);
+        this.draw();
     }
 
     draw() {
@@ -206,7 +210,7 @@ class Peekaboo {
                 return isPointInCircle(elem, mouse);
             })
             if (found) {
-                if (Object.keys(this.script).length > this.currentSceneIdx + 1) {
+                if (this.script.scenes.length > this.currentSceneIdx + 1) {
                     this.setScene(this.currentSceneIdx + 1);
                     this.draw();
                 } else {
@@ -227,7 +231,7 @@ class Peekaboo {
     }
 
     gameOver() {
-        createAlert('வாழ்த்துக்கள்!', 'நீங்கள் விளையாட்டை முடித்துவிட்டீர்கள்! :)', 'error');
+        createAlert(this.script.gameover.heading, this.script.gameover.text, 'error');
     }
 }
 
