@@ -4,76 +4,50 @@ class AssetManager {
         this.successCount = 0;
         this.results = {};
         this.parent = parent;
-        this.onLoad = null;
+        this.onload = null;
+    }
+
+    handleData(item, res) {
+        if (!res.ok) throw new Error(`Loading asset ${item.name} failed.`);
+
+        const store = (value) => this.results[item.name] = value;
+
+        const onsuccess = () => {
+            this.successCount += 1;
+            if (this.isDone()) this.onload();
+        }
+
+        const transformer = {
+            img: { initial: 'blob', final: (result) => createImageBitmap(result) },
+            audio: { initial: 'arrayBuffer', final: (result) => this.parent.audioCtx.decodeAudioData(result) },
+            txt: { initial: 'text', final: (result) => result }
+        }[item.type];
+
+        res[transformer.initial]().then(transformer.final).then(store).then(onsuccess);
     }
 
     loadAll() {
-        if (this.onLoad == null) {
-            throw new Error("AssetManager: callback not set");
-        }
-        let that = this;
-        that.numFiles = that.queue.length;
-        for (let x of this.queue) {
-            fetch(x.url, {
-                method: 'GET'
-            }).then((res) => {
-                if (res.ok) {
-                    if (x.type === 'img') {
-                        res.blob().then((result) => {
-                            createImageBitmap(result).then((imgBitmap) => {
-                                that.results[x.name] = imgBitmap;
-                            })
-                        }).then(function() {
-                            that.successCount++;
-                            if (that.isDone()) {
-                                that.onLoad();
-                            }
-                        });
-                    } else if (x.type === 'audio') {
-                        res.arrayBuffer().then(buffer => this.parent.audioCtx.decodeAudioData(buffer)).then(decodedData => {
-                            that.results[x.name] = decodedData;
-                        }).then(function() {
-                            that.successCount++;
-                            if (that.isDone()) {
-                                that.onLoad();
-                            }
-                        });
-                    } else {
-                        res.text().then((result) => {
-                            that.results[x.name] = result;
-                        }).then(function() {
-                            that.successCount++;
-                            if (that.isDone()) {
-                                that.onLoad();
-                            }
-                        });
-                    }
-                }
-                that.queue.remove(x);
-            });
-        }
+        if (this.onload === null) throw new Error("AssetManager: callback not set");
+        this.numFiles = this.queue.length;
+        this.queue.forEach((elem, idx) => fetch(elem.url).then(res => {
+            this.handleData(elem, res);
+            this.queue.splice(idx, 1);
+        }));
     }
 
-    queueItems(arr) { // array of file objects
-        for (let x of arr) {
-            if (!this.queue.includes(x))
-                this.queue.push(x);
-        }
+    queueItem(item) {
+        if (!this.queue.includes(item)) this.queue.push(item);
+    }
+
+    queueItems(arr) {
+        arr.forEach((elem) => this.queueItem(elem));
     }
 
     isDone() {
-        return (this.numFiles == this.successCount);
+        return (this.numFiles === this.successCount);
     }
 
     getAsset(name) {
         return this.results[name]
-    }
-}
-
-class FileInfo {
-    constructor(name, url, type) {
-        this.name = name;
-        this.url = url;
-        this.type = type;
     }
 }

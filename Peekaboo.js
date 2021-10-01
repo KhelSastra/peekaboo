@@ -1,5 +1,5 @@
 class Peekaboo {
-    constructor(selector) {
+    constructor(selector, assetsDict) {
         this.started = false;
         this.debug = false;
         this.mouse = {
@@ -82,11 +82,15 @@ class Peekaboo {
 
         this.assets = new AssetManager(this);
 
-        this.assets.queueItems(ASSETS);
+        this.assets.queueItems(assetsDict);
+        this.assets.onload = () => {
+            this.onload();
+        }
+        this.assets.loadAll();
     }
 
-    onLoad() {
-        console.log('Finished loading assets.');
+    onload() {
+        if (this.debug) console.log('Finished loading assets.');
         this.begin();
     }
 
@@ -126,18 +130,25 @@ class Peekaboo {
         if (!this.started) return;
         this.ctx.clearRect(0, 0, CANVAS_SIZE.x, CANVAS_SIZE.y);
         if (this.currentScene.bg) this.drawBg(this.currentScene.bg);
-        if (this.currentMode === 'story') {
-            document.querySelector("#game").style.justifyContent = 'initial';
-            this.canvas.style.cursor = 'default';
-            this.vnContainer.style.display = 'flex';
-            for (let sprite of this.currentScene.sprites) {
-                this.drawSprite(sprite);
+
+        switch (this.currentMode) {
+            case 'story': {
+                document.querySelector("#game").style.justifyContent = 'initial';
+                this.canvas.style.cursor = 'default';
+                this.vnContainer.style.display = 'flex';
+                this.currentScene.sprites?.forEach(sprite => this.drawSprite(sprite));
+                this.setCurrentDialogue(this.currentScene.dialogues[this.currentDialogueIndex]);
+                break;
             }
-            this.setCurrentDialogue(this.currentScene.dialogues[this.currentDialogueIndex]);
-        } else if (this.currentMode = 'find') {
-            this.vnContainer.style.display = 'none';
-            document.querySelector("#game").style.justifyContent = 'center';
-            this.canvas.style.cursor = 'pointer';
+            case 'find': {
+                this.vnContainer.style.display = 'none';
+                document.querySelector("#game").style.justifyContent = 'center';
+                this.canvas.style.cursor = 'pointer';
+                break;
+            }
+            default: {
+                throw new Error("Unknown scene mode.");
+            }
         }
     }
 
