@@ -9,7 +9,14 @@ function init() {
     if (!params.get('lang') || !params.get('script')) {
         window.location.href = window.location.href.replace('game.html', 'index.html');
     }
+
     fetch(`assets/txt/${params.get('script')}`)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`Could not load asset list: "${res.statusText}".`);
+            }
+            return res;
+        })
         .then(value => value.json())
         .then(assets => {
             const game = new Peekaboo('#game-canvas', assets);
@@ -27,7 +34,7 @@ function init() {
             window_.debug = () => {
                 window_.game.debug = !window_.game.debug;
             }
-        }).catch(err => {
-            cfa.message(`Error: ${err} Try reloading the page.`);
+        }).catch(async err => {
+            await cfa.message(`Error: ${err} Try reloading the page.`);
         })
 }

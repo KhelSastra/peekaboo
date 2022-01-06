@@ -20,8 +20,8 @@ var __async = (__this, __arguments, generator) => {
 };
 
 // src/deps.ts
-import * as cfa from "https://esm.sh/cf-alert";
-import { default as default2 } from "https://esm.sh/yamljs";
+import { default as default2 } from "https://esm.sh/cf-alert";
+import { default as default3 } from "https://esm.sh/yamljs";
 
 // src/AssetManager.ts
 var AssetManager = class {
@@ -45,7 +45,7 @@ var AssetManager = class {
       img: { initial: "blob", final: (result) => createImageBitmap(result) },
       audio: { initial: "arrayBuffer", final: (result) => this.parent.audioCtx.decodeAudioData(result) },
       txt: { initial: "text", final: (result) => result },
-      yaml: { initial: "text", final: (result) => default2.parse(result) }
+      yaml: { initial: "text", final: (result) => default3.parse(result) }
     };
     const rehydrator = rehydrators[item.type];
     res[rehydrator.initial]().then(rehydrator.final).then(store).then(onsuccess);
@@ -55,6 +55,7 @@ var AssetManager = class {
       throw new Error("AssetManager: callback not set");
     this.numFiles = this.queue.length;
     this.queue.forEach((elem, idx) => fetch(elem.url).then((res) => {
+      console.log(res);
       this.handleData(elem, res);
       this.queue.splice(idx, 1);
     }));
@@ -369,7 +370,7 @@ var Peekaboo = class {
   }
   gameOver() {
     return __async(this, null, function* () {
-      yield cfa.message(i(this.script.gameover.text), i(this.script.gameover.heading));
+      yield default2.message(i(this.script.gameover.text), i(this.script.gameover.heading));
     });
   }
 };
@@ -387,7 +388,12 @@ function init() {
   if (!params2.get("lang") || !params2.get("script")) {
     window.location.href = window.location.href.replace("game.html", "index.html");
   }
-  fetch(`assets/txt/${params2.get("script")}`).then((value) => value.json()).then((assets) => {
+  fetch(`assets/txt/${params2.get("script")}`).then((res) => {
+    if (!res.ok) {
+      throw new Error(`Could not load asset list: "${res.statusText}".`);
+    }
+    return res;
+  }).then((value) => value.json()).then((assets) => {
     const game = new Peekaboo("#game-canvas", assets);
     if (isAspectTooNarrow()) {
       window.addEventListener("resize", () => {
@@ -402,7 +408,7 @@ function init() {
     window_.debug = () => {
       window_.game.debug = !window_.game.debug;
     };
-  }).catch((err) => {
-    cfa.message(`Error: ${err} Try reloading the page.`);
-  });
+  }).catch((err) => __async(this, null, function* () {
+    yield default2.message(`Error: ${err} Try reloading the page.`);
+  }));
 }

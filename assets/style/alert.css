@@ -6,6 +6,10 @@
     overflow: auto;
 }
 
+#alert-mask {
+    z-index: 9999999;
+}
+
 #alert-header, #alert-footer {
     padding: 1rem;
 }

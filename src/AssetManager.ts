@@ -57,6 +57,7 @@ export class AssetManager {
         if (this.onload === null) throw new Error("AssetManager: callback not set");
         this.numFiles = this.queue.length;
         this.queue.forEach((elem, idx) => fetch(elem.url).then(res => {
+            console.log(res);
             this.handleData(elem, res);
             this.queue.splice(idx, 1);
         }));
