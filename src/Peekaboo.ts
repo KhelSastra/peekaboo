@@ -1,5 +1,36 @@
-class Peekaboo {
-    constructor(selector, assetsDict) {
+import { AssetManager } from "./AssetManager";
+import { Sprite, Scene, Script, Point } from "./types";
+import cfa from "https://esm.sh/cf-alert";
+import { AudioPlayer } from "./AudioPlayer";
+import { CANVAS_SIZE, isMobile } from "./utils";
+
+export class Peekaboo {
+    started: boolean;
+    debug: boolean;
+    mouse: { x: number; y: number; left: boolean; right: boolean; middle: boolean; };
+    canvas: HTMLCanvasElement;
+    speakerName: HTMLDivElement;
+    vnContainer: HTMLDivElement;
+    vnText: HTMLDivElement;
+    prevBtn: HTMLButtonElement;
+    nextBtn: HTMLButtonElement;
+    loadingDiv: HTMLDivElement;
+    vnButtons: HTMLButtonElement;
+    audioCtx: AudioContext;
+    audio: AudioPlayer;
+    script: Script | null;
+    currentSprites: Sprite[];
+    currentScene: Scene;
+    currentMode: string;
+    currentDialogueIndex: number;
+    currentSceneIdx: number;
+    ctx: CanvasRenderingContext2D;
+    assets: AssetManager;
+    actualSize: Point;
+    foundImages: number;
+    isLoggingMousePos: boolean;
+
+    constructor(selector: string, assetsDict: any) {
         this.started = false;
         this.debug = false;
         this.mouse = {
@@ -11,23 +42,22 @@ class Peekaboo {
         }
 
         this.canvas = document.querySelector(selector);
-        this.speakerNameDiv = document.querySelector('#vn-speaker-name');
+        this.speakerName = document.querySelector('#vn-speaker-name');
         this.vnContainer = document.querySelector('#vn-controls');
-        this.vnTextDiv = document.querySelector('#vn-text');
+        this.vnText = document.querySelector('#vn-text');
         this.prevBtn = document.querySelector("#vn-prev");
         this.nextBtn = document.querySelector("#vn-next");
         this.loadingDiv = document.querySelector('#loading');
         this.vnButtons = document.querySelector('#vn-buttons');
         this.audioCtx = new AudioContext();
-        this.audio = new Audio(this);
+        this.audio = new AudioPlayer(this);
         this.script = null;
-        this.currentSprites = [];
         this.currentScene = null;
         this.currentMode = 'story';
         this.currentDialogueIndex = 0;
 
         if (isMobile()) {
-            for (let elem of [this.speakerNameDiv, this.vnContainer, this.vnTextDiv, this.vnButtons, this.canvas]) {
+            for (let elem of [this.speakerName, this.vnContainer, this.vnText, this.vnButtons, this.canvas]) {
                 elem.classList.add('mobile');
             }
         }
@@ -131,9 +161,11 @@ class Peekaboo {
         this.ctx.clearRect(0, 0, CANVAS_SIZE.x, CANVAS_SIZE.y);
         if (this.currentScene.bg) this.drawBg(this.currentScene.bg);
 
+        const game = document.querySelector("#game") as HTMLElement;
+
         switch (this.currentMode) {
             case 'story': {
-                document.querySelector("#game").style.justifyContent = 'initial';
+                game.style.justifyContent = 'initial';
                 this.canvas.style.cursor = 'default';
                 this.vnContainer.style.display = 'flex';
                 this.currentScene.sprites?.forEach(sprite => this.drawSprite(sprite));
@@ -142,7 +174,7 @@ class Peekaboo {
             }
             case 'find': {
                 this.vnContainer.style.display = 'none';
-                document.querySelector("#game").style.justifyContent = 'center';
+                game.style.justifyContent = 'center';
                 this.canvas.style.cursor = 'pointer';
                 break;
             }
@@ -154,8 +186,8 @@ class Peekaboo {
 
     setCurrentDialogue(dialogue) {
         if (!dialogue) return;
-        this.speakerNameDiv.innerHTML = dialogue.speaker;
-        this.vnTextDiv.innerHTML = dialogue.text;
+        this.speakerName.innerHTML = dialogue.speaker;
+        this.vnText.innerHTML = dialogue.text;
     }
 
     setBgGradient(c1, c2) {
@@ -241,8 +273,8 @@ class Peekaboo {
         }
     }
 
-    gameOver() {
-        createAlert(this.script.gameover.heading, this.script.gameover.text, 'error');
+    async gameOver() {
+        await cfa.message(this.script.gameover.text, this.script.gameover.heading);
     }
 }
 

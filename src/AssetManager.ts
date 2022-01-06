@@ -1,5 +1,24 @@
-class AssetManager {
-    constructor(parent) {
+import YAML from 'https://esm.sh/yamljs';
+
+interface FileInfo {
+    name: string,
+    url: string,
+    type: string
+}
+
+interface AssetManagerParent {
+    audioCtx: AudioContext
+}
+
+export class AssetManager {
+    queue: any[];
+    successCount: number;
+    results: {};
+    parent: any;
+    onload: any;
+    numFiles: number;
+
+    constructor(parent: AssetManagerParent) {
         this.queue = [];
         this.successCount = 0;
         this.results = {};
@@ -7,10 +26,10 @@ class AssetManager {
         this.onload = null;
     }
 
-    handleData(item, res) {
+    handleData(item: FileInfo, res: Response) {
         if (!res.ok) throw new Error(`Loading asset ${item.name} failed.`);
 
-        const store = (value) => this.results[item.name] = value;
+        const store = (value: any) => this.results[item.name] = value;
 
         const onsuccess = () => {
             this.successCount += 1;
@@ -19,7 +38,7 @@ class AssetManager {
 
         const transformer = {
             img: { initial: 'blob', final: (result) => createImageBitmap(result) },
-            audio: { initial: 'arrayBuffer', final: (result) => this.parent.audioCtx.decodeAudioData(result) },
+            audio: { initial: 'arrayBuffer', final: (result: any) => this.parent.audioCtx.decodeAudioData(result) },
             txt: { initial: 'text', final: (result) => result },
             yaml: { initial: 'text', final: (result) => YAML.parse(result) }
         }[item.type];
@@ -36,7 +55,7 @@ class AssetManager {
         }));
     }
 
-    queueItem(item) {
+    queueItem(item: FileInfo) {
         if (!this.queue.includes(item)) this.queue.push(item);
     }
 

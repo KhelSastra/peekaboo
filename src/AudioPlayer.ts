@@ -1,10 +1,14 @@
-class Audio {
+export class AudioPlayer {
+    parent: any;
+    musicPlaying: boolean;
+    currentSourceNode: AudioBufferSourceNode;
+
     constructor(parent) {
         this.parent = parent;
         this.musicPlaying = false;
     }
 
-    static playMusicFile(filename, loop = false) {
+    playMusicFile(filename, loop = false) {
         if (this.musicPlaying) {
             this.musicPlaying = false;
             this.currentSourceNode.stop();
