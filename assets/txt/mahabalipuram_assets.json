@@ -1,8 +1,8 @@
 [
     {
         "name": "script",
-        "url": "assets/txt/mahabalipuram.json",
-        "type": "txt"
+        "url": "assets/txt/mahabalipuram.yaml",
+        "type": "yaml"
     },
     {
         "name": "AuntyResting",

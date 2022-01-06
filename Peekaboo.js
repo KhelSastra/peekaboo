@@ -102,7 +102,7 @@ class Peekaboo {
 
     begin() {
         this.started = true;
-        this.script = JSON.parse(this.assets.getAsset('script'));
+        this.script = this.assets.getAsset('script');
         this.setScene(0);
         this.loadingDiv.style.display = 'none';
         this.draw();

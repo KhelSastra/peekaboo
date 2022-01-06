@@ -20,7 +20,8 @@ class AssetManager {
         const transformer = {
             img: { initial: 'blob', final: (result) => createImageBitmap(result) },
             audio: { initial: 'arrayBuffer', final: (result) => this.parent.audioCtx.decodeAudioData(result) },
-            txt: { initial: 'text', final: (result) => result }
+            txt: { initial: 'text', final: (result) => result },
+            yaml: { initial: 'text', final: (result) => YAML.parse(result) }
         }[item.type];
 
         res[transformer.initial]().then(transformer.final).then(store).then(onsuccess);
