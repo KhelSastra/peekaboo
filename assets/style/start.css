@@ -23,13 +23,14 @@ body {
 
 .peekaboo-form {
     background-color: rgba(0, 0, 0, 0.4);
-    min-height: 30%;
+    min-height: 40%;
     min-width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 0.2rem;
+    padding: 1rem;
 }
 
 .peekaboo-form>h1 {
