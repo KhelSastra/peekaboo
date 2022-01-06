@@ -382,7 +382,11 @@ function isPointInCircle(circle, point) {
 // src/main.ts
 window.onload = init;
 function init() {
-  fetch("assets/txt/mahabalipuram_assets.json").then((value) => value.json()).then((assets) => {
+  const params2 = getQueryParams();
+  if (!params2.get("lang") || !params2.get("script")) {
+    window.location.href = window.location.href.replace("game.html", "index.html");
+  }
+  fetch(`assets/txt/${params2.get("script")}`).then((value) => value.json()).then((assets) => {
     const game = new Peekaboo("#game-canvas", assets);
     if (isAspectTooNarrow()) {
       window.addEventListener("resize", () => {

@@ -1,11 +1,15 @@
 import { cfa } from "./deps";
 import { Peekaboo } from "./Peekaboo";
-import { isAspectTooNarrow } from "./utils";
+import { getQueryParams, isAspectTooNarrow } from "./utils";
 
 window.onload = init;
 
 function init() {
-    fetch('assets/txt/mahabalipuram_assets.json')
+    const params = getQueryParams();
+    if (!params.get('lang') || !params.get('script')) {
+        window.location.href = window.location.href.replace('game.html', 'index.html');
+    }
+    fetch(`assets/txt/${params.get('script')}`)
         .then(value => value.json())
         .then(assets => {
             const game = new Peekaboo('#game-canvas', assets);
