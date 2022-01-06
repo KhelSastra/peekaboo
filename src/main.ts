@@ -1,3 +1,4 @@
+import { cfa } from "./deps";
 import { Peekaboo } from "./Peekaboo";
 import { isAspectTooNarrow } from "./utils";
 
@@ -18,10 +19,11 @@ function init() {
             }
 
             const window_ = window as any;
+            window_.game = game;
             window_.debug = () => {
                 window_.game.debug = !window_.game.debug;
             }
         }).catch(err => {
-
+            cfa.message(`Error: ${err} Try reloading the page.`);
         })
 }

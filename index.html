@@ -6,10 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peekaboo</title>
+
+    <link rel='stylesheet' href='assets/style/start.css'>
 </head>
 
 <body>
-
+    <form class='peekaboo-form' action='game.html'>
+        <h1>Peekaboo</h1>
+        <div class='form-group'>
+            <label for='lang'>Select language</label>
+            <select name="lang" id="lang">
+                <option value='ta'>Tamil</option>
+                <option value='en'>English</option>
+            </select>
+        </div>
+        <div class='form-group submit-group'>
+            <input type='submit' value='Start'>
+        </div>
+    </form>
 </body>
 
 </html>

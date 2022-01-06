@@ -19,8 +19,11 @@ var __async = (__this, __arguments, generator) => {
   });
 };
 
+// src/deps.ts
+import * as cfa from "https://esm.sh/cf-alert";
+import { default as default2 } from "https://esm.sh/yamljs";
+
 // src/AssetManager.ts
-import YAML from "https://esm.sh/yamljs";
 var AssetManager = class {
   constructor(parent) {
     this.queue = [];
@@ -42,7 +45,7 @@ var AssetManager = class {
       img: { initial: "blob", final: (result) => createImageBitmap(result) },
       audio: { initial: "arrayBuffer", final: (result) => this.parent.audioCtx.decodeAudioData(result) },
       txt: { initial: "text", final: (result) => result },
-      yaml: { initial: "text", final: (result) => YAML.parse(result) }
+      yaml: { initial: "text", final: (result) => default2.parse(result) }
     }[item.type];
     res[transformer.initial]().then(transformer.final).then(store).then(onsuccess);
   }
@@ -69,9 +72,6 @@ var AssetManager = class {
     return this.results[name];
   }
 };
-
-// src/Peekaboo.ts
-import cfa from "https://esm.sh/cf-alert";
 
 // src/AudioPlayer.ts
 var AudioPlayer = class {
@@ -127,8 +127,20 @@ function isAspectTooNarrow() {
 function isMobile() {
   return /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
+function getQueryParams() {
+  return new URLSearchParams(window.location.search);
+}
+
+// src/i18n.ts
+function createI(lang) {
+  return function i2(node) {
+    return node[lang] || node.d;
+  };
+}
 
 // src/Peekaboo.ts
+var params = getQueryParams();
+var i = createI(params.get("lang"));
 var Peekaboo = class {
   constructor(selector, assetsDict) {
     this.started = false;
@@ -272,8 +284,8 @@ var Peekaboo = class {
   setCurrentDialogue(dialogue) {
     if (!dialogue)
       return;
-    this.speakerName.innerHTML = dialogue.speaker;
-    this.vnText.innerHTML = dialogue.text;
+    this.speakerName.innerHTML = i(dialogue.speaker);
+    this.vnText.innerHTML = i(dialogue.text);
   }
   setBgGradient(c1, c2) {
     let gradient = this.ctx.createLinearGradient(0, 0, CANVAS_SIZE.x, CANVAS_SIZE.y);
@@ -356,7 +368,7 @@ var Peekaboo = class {
   }
   gameOver() {
     return __async(this, null, function* () {
-      yield cfa.message(this.script.gameover.text, this.script.gameover.heading);
+      yield cfa.message(i(this.script.gameover.text), i(this.script.gameover.heading));
     });
   }
 };
@@ -381,9 +393,11 @@ function init() {
       return;
     }
     const window_ = window;
+    window_.game = game;
     window_.debug = () => {
       window_.game.debug = !window_.game.debug;
     };
   }).catch((err) => {
+    cfa.message(`Error: ${err} Try reloading the page.`);
   });
 }

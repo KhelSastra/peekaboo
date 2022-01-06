@@ -20,3 +20,7 @@ export const removeByValue = function (arr: any[], v: any) {
     }
     return false;
 }
+
+export function getQueryParams() {
+    return new URLSearchParams(window.location.search);
+}

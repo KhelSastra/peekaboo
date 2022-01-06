@@ -1,6 +1,11 @@
 gameover:
-  heading: வாழ்த்துக்கள்!
-  text: "நீங்கள் விளையாட்டை முடித்துவிட்டீர்கள்! :)"
+  heading:
+    ta: வாழ்த்துக்கள்!
+    d: "Congratulations!"
+  text:
+    ta: "நீங்கள் விளையாட்டை முடித்துவிட்டீர்கள்! :)"
+    d: "You finished the game :)"
+
 scenes:
   - mode: story
     bg: Mahab1
@@ -10,10 +15,15 @@ scenes:
           "x": 100
           "y": 250
     dialogues:
-      - speaker: வள்ளி அம்மா
-        text: >
-          இது ஒரு கதை, ஆனால் இன்னொரு கதை இருக்கிறது. பாபாவைக் கண்டுபிடி, அவர்
-          சொல்வார்.
+      - speaker:
+          ta: வள்ளி அம்மா
+          d: Valli Amma
+        text:
+          ta: >
+            இது ஒரு கதை, ஆனால் இன்னொரு கதை இருக்கிறது. பாபாவைக் கண்டுபிடி, அவர்
+            சொல்வார்.
+          d: >
+            That's one version of the story, but there's another! Find Baba, he'll tell you!
   - mode: find
     bg: MahabCrowdWithBaba
     rings:
@@ -29,33 +39,65 @@ scenes:
           "x": 500
           "y": 270
     dialogues:
-      - speaker: பாபா
-        text: என்னைக் கண்டுபிடித்ததற்கு வாழ்த்துக்கள்!
-      - speaker: பாபா
-        text: >
-          ஒரு உள்ளூர் புராணக்கதையிபடி மகாபலிபுரத்தின் கரையில் ஏழு கோவில்கள் (ஏழு
-          பகோடாக்கள்) வரிசையாக அமைந்திருந்தது...
-      - speaker: பாபா
-        text: >
-          அப்போது, இந்திரன் இந்நகரத்தின் செழிப்பால் கோபமடைந்து புயலைக்
-          கட்டவிழ்த்து, நகரத்தை மூழ்கடித்தான்.
-      - speaker: பாபா
-        text: >
-          "இயற்கை பேரழிவின்" பின்னர் கடற்கரை கோவில் மட்டுமே உயிர் பிழைத்ததாக
-          தெரிகிறது.
-      - speaker: பாபா
-        text: >
-          ஒரு குறிப்பிட்ட திசையில் இருந்து பார்த்தால், கடற்கரை கோவில் வளாகம்
-          தர்மராஜாவின் ரதத்தின் பிரதிபலிப்பாக காணப்படுகிறது.
-      - speaker: பாபா
-        text: >
-          கரையோரத்தில் உள்ள சிவலிங்கத்தின் மீது சூரிய ஒளியை வெளிப்படுத்தும்
-          வகையில் கிழக்கு கோவில் வளாகத்தின் முக்கிய கோவில் வாயில் கிழக்கு நோக்கி
-          கட்டப்பட்டுள்ளது.
-      - speaker: பாபா
-        text: >
-          மகாபலிபுரம் தமிழ்நாட்டின் மிகப் பெரிய பொக்கிஷங்களில்
-          ஒன்றாகும்.கட்டடக்கலையிலும் தமிழர்கள் சிறந்து விளங்கினார் என்பதற்கு
-          எடுத்துக்காட்டாக இது விளங்குகிறது.
-      - speaker: பாபா
-        text: நம் வரலாற்றை நாம் பாதுகாக்க வேண்டும் குழந்தைகளே!!!
+      - speaker:
+          ta: பாபா
+          d: Baba
+        text:
+          ta: என்னைக் கண்டுபிடித்ததற்கு வாழ்த்துக்கள்!
+          d: Congratulations on finding me!
+      - speaker:
+          ta: பாபா
+          d: Baba
+        text:
+          ta: >
+            ஒரு உள்ளூர் புராணக்கதையிபடி மகாபலிபுரத்தின் கரையில் ஏழு கோவில்கள் (ஏழு
+            பகோடாக்கள்) வரிசையாக அமைந்திருந்தது...
+          d: According to legend, there were seven temples lined up on the shores of Mahabalipuram...
+      - speaker:
+          ta: பாபா
+          d: Baba
+        text:
+          ta: >
+            அப்போது, இந்திரன் இந்நகரத்தின் செழிப்பால் கோபமடைந்து புயலைக்
+            கட்டவிழ்த்து, நகரத்தை மூழ்கடித்தான்.
+          d: Indra, angered by the prosperity of the city, unleashed a storm that engulfed it.
+      - speaker:
+          ta: பாபா
+          d: Baba
+        text:
+          ta: >
+            "இயற்கை பேரழிவின்" பின்னர் கடற்கரை கோவில் மட்டுமே உயிர் பிழைத்ததாக
+            தெரிகிறது.
+          d: Only the Shore Temple survived the onslaught.
+      - speaker:
+          ta: பாபா
+          d: Baba
+        text:
+          ta: >
+            ஒரு குறிப்பிட்ட திசையில் இருந்து பார்த்தால், கடற்கரை கோவில் வளாகம்
+            தர்மராஜாவின் ரதத்தின் பிரதிபலிப்பாக காணப்படுகிறது.
+          d: When seen from a certain angle, the Shore Temple complex appears to be a reflection of Dharmaraja's chariot.
+      - speaker:
+          ta: பாபா
+          d: Baba
+        text:
+          ta: >
+            கரையோரத்தில் உள்ள சிவலிங்கத்தின் மீது சூரிய ஒளியை வெளிப்படுத்தும்
+            வகையில் கிழக்கு கோவில் வளாகத்தின் முக்கிய கோவில் வாயில் கிழக்கு நோக்கி
+            கட்டப்பட்டுள்ளது.
+          d: The main temple gate of the eastern complex is built facing the east, to reflect light from the Shivalingam.
+      - speaker:
+          ta: பாபா
+          d: Baba
+        text:
+          ta: >
+            மகாபலிபுரம் தமிழ்நாட்டின் மிகப் பெரிய பொக்கிஷங்களில்
+            ஒன்றாகும்.கட்டடக்கலையிலும் தமிழர்கள் சிறந்து விளங்கினார் என்பதற்கு
+            எடுத்துக்காட்டாக இது விளங்குகிறது.
+          d: Mahabalipuram is one of the greatest treasures of Tamil Nadu. It is an example of Tamil excellence in architecture, as well.
+      - speaker:
+          ta: பாபா
+          d: Baba
+        text:
+          ta: நம் வரலாற்றை நாம் பாதுகாக்க வேண்டும் குழந்தைகளே!
+          d: Children, we must protect our history and always remember our roots!

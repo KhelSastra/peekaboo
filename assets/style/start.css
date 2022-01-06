@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'azukifontBI';
+    src: url('../fonts/azukifontB.ttf');
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e29576;
+    color: white;
+    font-family: 'azukifontBI';
+    font-display: swap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.peekaboo-form {
+    background-color: rgba(0, 0, 0, 0.4);
+    min-height: 30%;
+    min-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.2rem;
+}
+
+.peekaboo-form>h1 {
+    font-size: 1.6rem;
+}
+
+.form-group {
+    width: 90%;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-group.submit-group {
+    justify-content: flex-end;
+}
+
+.peekaboo-form select,
+.peekaboo-form input {
+    color: white;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 0.2rem;
+    min-width: 12ch;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.4rem;
+    cursor: pointer;
+}
+
+select option {
+    color: black !important;
+    cursor: pointer;
+}

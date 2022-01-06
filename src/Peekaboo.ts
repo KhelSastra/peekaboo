@@ -1,8 +1,12 @@
 import { AssetManager } from "./AssetManager";
 import { Sprite, Scene, Script, Point } from "./types";
-import cfa from "https://esm.sh/cf-alert";
 import { AudioPlayer } from "./AudioPlayer";
-import { CANVAS_SIZE, isMobile } from "./utils";
+import { CANVAS_SIZE, getQueryParams, isMobile } from "./utils";
+import { createI } from "./i18n";
+import { cfa } from "./deps";
+
+const params = getQueryParams();
+const i = createI(params.get('lang'));
 
 export class Peekaboo {
     started: boolean;
@@ -186,8 +190,8 @@ export class Peekaboo {
 
     setCurrentDialogue(dialogue) {
         if (!dialogue) return;
-        this.speakerName.innerHTML = dialogue.speaker;
-        this.vnText.innerHTML = dialogue.text;
+        this.speakerName.innerHTML = i(dialogue.speaker);
+        this.vnText.innerHTML = i(dialogue.text);
     }
 
     setBgGradient(c1, c2) {
@@ -274,7 +278,7 @@ export class Peekaboo {
     }
 
     async gameOver() {
-        await cfa.message(this.script.gameover.text, this.script.gameover.heading);
+        await cfa.message(i(this.script.gameover.text), i(this.script.gameover.heading));
     }
 }
 

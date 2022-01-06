@@ -1,4 +1,4 @@
-import YAML from 'https://esm.sh/yamljs';
+import { YAML } from "./deps";
 
 interface FileInfo {
     name: string,
