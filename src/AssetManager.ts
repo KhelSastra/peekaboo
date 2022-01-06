@@ -10,6 +10,11 @@ interface AssetManagerParent {
     audioCtx: AudioContext
 }
 
+interface DataRehydrator {
+    initial: 'blob' | 'arrayBuffer' | 'text' | 'json',
+    final: (res: any) => any;
+}
+
 export class AssetManager {
     queue: any[];
     successCount: number;
@@ -36,14 +41,16 @@ export class AssetManager {
             if (this.isDone()) this.onload();
         }
 
-        const transformer = {
+        const rehydrators: Record<string, DataRehydrator> = {
             img: { initial: 'blob', final: (result) => createImageBitmap(result) },
             audio: { initial: 'arrayBuffer', final: (result: any) => this.parent.audioCtx.decodeAudioData(result) },
             txt: { initial: 'text', final: (result) => result },
             yaml: { initial: 'text', final: (result) => YAML.parse(result) }
-        }[item.type];
+        }
 
-        res[transformer.initial]().then(transformer.final).then(store).then(onsuccess);
+        const rehydrator = rehydrators[item.type];
+
+        res[rehydrator.initial]().then(rehydrator.final).then(store).then(onsuccess);
     }
 
     loadAll() {

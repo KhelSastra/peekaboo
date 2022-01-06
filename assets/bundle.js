@@ -41,13 +41,14 @@ var AssetManager = class {
       if (this.isDone())
         this.onload();
     };
-    const transformer = {
+    const rehydrators = {
       img: { initial: "blob", final: (result) => createImageBitmap(result) },
       audio: { initial: "arrayBuffer", final: (result) => this.parent.audioCtx.decodeAudioData(result) },
       txt: { initial: "text", final: (result) => result },
       yaml: { initial: "text", final: (result) => default2.parse(result) }
-    }[item.type];
-    res[transformer.initial]().then(transformer.final).then(store).then(onsuccess);
+    };
+    const rehydrator = rehydrators[item.type];
+    res[rehydrator.initial]().then(rehydrator.final).then(store).then(onsuccess);
   }
   loadAll() {
     if (this.onload === null)
