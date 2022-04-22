@@ -1,0 +1,47 @@
+[
+    {
+        "name": "script",
+        "url": "assets/txt/haridwar.yaml",
+        "type": "yaml"
+    },
+    {
+        "name": "AuntyResting",
+        "url": "assets/img/AuntyResting.png",
+        "type": "img"
+    },
+    {
+        "name": "Mandala",
+        "url": "assets/img/Mandala.png",
+        "type": "img"
+    },
+    {
+        "name": "find1",
+        "url": "assets/img/find1.png",
+        "type": "img"
+    },
+    {
+        "name": "baba",
+        "url": "assets/img/baba.png",
+        "type": "img"
+    },
+    {
+        "name": "RiverScene1",
+        "url": "assets/img/River1.jpg",
+        "type": "img"
+    },
+    {
+        "name": "GangaAartiDay",
+        "url": "assets/img/GangaAarti.png",
+        "type": "img"
+    },
+    {
+        "name": "GangaAartiNight",
+        "url": "assets/img/GangaAartiNight.png",
+        "type": "img"
+    },
+    {
+        "name": "GangaAartiSolo",
+        "url": "assets/img/GangaAartiSolo.png",
+        "type": "img"
+    }
+]
