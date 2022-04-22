@@ -14,22 +14,72 @@
     <form class='peekaboo-form' action='game.html'>
         <h1>Peekaboo</h1>
         <div class='form-group'>
-            <label for='lang'>Select language</label>
-            <select name="lang" id="lang">
-                <option value='ta'>Tamil</option>
-                <option value='en'>English</option>
+            <label for='script'>Story</label>
+            <select name="script" id="script">
+                <option disabled selected>Select...</option>
             </select>
         </div>
         <div class='form-group'>
-            <label for='script'>Story</label>
-            <select name="script" id="script">
-                <option value='mahabalipuram_assets.json'>Mahabalipuram</option>
+            <label for='lang'>Select language</label>
+            <select name="lang" id="lang">
+                <option disabled selected>Select...</option>
             </select>
         </div>
         <div class='form-group submit-group'>
             <input type='submit' value='Start'>
         </div>
     </form>
+
+    <script>
+        const data = {
+            "mahabalipuram_assets.json": {
+                name: "Mahabalipuram",
+                langs: [{
+                    name: 'English',
+                    shortName: 'en'
+                }, {
+                    name: 'Tamil',
+                    shortName: 'ta'
+                }]
+            },
+            "madurai_assets.json": {
+                name: "Madurai",
+                langs: [{
+                    name: 'English',
+                    shortName: 'en'
+                }]
+            },
+            "haridwar_assets.json": {
+                name: "Haridwar",
+                langs: [{
+                    name: 'English',
+                    shortName: 'en'
+                }]
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const script = document.querySelector('#script');
+            const lang = document.querySelector('#lang');
+
+            for (const [file, meta] of Object.entries(data)) {
+                const opt = document.createElement('option');
+                opt.value = file;
+                opt.innerHTML = meta.name;
+                script.appendChild(opt);
+            }
+
+            script.onchange = () => {
+                lang.innerHTML = '<option selected disabled>Select...</option>';
+                for (const language of data[script.value].langs) {
+                    const opt = document.createElement('option');
+                    opt.value = language.shortName;
+                    opt.innerHTML = language.name;
+                    lang.appendChild(opt);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
